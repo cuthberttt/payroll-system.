@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Napol Inc. Payroll{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body p-5">
+                <h2 class="text-center mb-4" style="color: #003366;">🏢 NAPOL INC.</h2>
+                <h4 class="text-center mb-4">Payroll System</h4>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn w-100" style="background-color: #003366; color: white;">
+                        Login
+                    </button>
+                </form>
+                <hr>
+                <p class="text-center text-muted small">
+                    <strong>Demo Credentials:</strong><br>
+                    Admin: admin@napolinc.com / admin123<br>
+                    Employee: ama.osei@napolinc.com / employee123
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

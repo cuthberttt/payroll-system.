@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Run Payroll - Napol Inc. Payroll{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 style="color: #003366;" class="mb-4">Run Payroll</h2>
+        
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="month" class="form-label">Month *</label>
+                        <select class="form-select" id="month" name="month" required>
+                            <option value="">-- Select Month --</option>
+                            <option value="1" {% if current_month == 1 %}selected{% endif %}>January</option>
+                            <option value="2" {% if current_month == 2 %}selected{% endif %}>February</option>
+                            <option value="3" {% if current_month == 3 %}selected{% endif %}>March</option>
+                            <option value="4" {% if current_month == 4 %}selected{% endif %}>April</option>
+                            <option value="5" {% if current_month == 5 %}selected{% endif %}>May</option>
+                            <option value="6" {% if current_month == 6 %}selected{% endif %}>June</option>
+                            <option value="7" {% if current_month == 7 %}selected{% endif %}>July</option>
+                            <option value="8" {% if current_month == 8 %}selected{% endif %}>August</option>
+                            <option value="9" {% if current_month == 9 %}selected{% endif %}>September</option>
+                            <option value="10" {% if current_month == 10 %}selected{% endif %}>October</option>
+                            <option value="11" {% if current_month == 11 %}selected{% endif %}>November</option>
+                            <option value="12" {% if current_month == 12 %}selected{% endif %}>December</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="year" class="form-label">Year *</label>
+                        <input type="number" class="form-control" id="year" name="year" value="{{ current_year }}" required>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <strong>Note:</strong> This will generate payslips for all active employees. Existing payslips will not be overwritten.
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn" style="background-color: #003366; color: white;">
+                            💰 Run Payroll
+                        </button>
+                        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Napol Inc. Payroll{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h1 style="color: #003366;">Admin Dashboard</h1>
+        <p class="text-muted">Welcome to Napol Inc. Payroll Management System</p>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card border-left-primary">
+            <div class="card-body">
+                <h6 class="text-muted">Total Employees</h6>
+                <h2 style="color: #003366;">{{ total_employees }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-left-success">
+            <div class="card-body">
+                <h6 class="text-muted">Active Employees</h6>
+                <h2 style="color: #003366;">{{ active_employees }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-left-info">
+            <div class="card-body">
+                <h6 class="text-muted">Last Payroll Run</h6>
+                <p style="color: #003366;">
+                    {% if last_payroll_date %}
+                        {{ last_payroll_date.strftime('%d/%m/%Y') }}
+                    {% else %}
+                        No payroll yet
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header" style="background-color: #003366; color: white;">
+                <h5>Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <a href="{{ url_for('employees_list') }}" class="btn btn-outline-primary mb-2 w-100">
+                    👥 Manage Employees
+                </a>
+                <a href="{{ url_for('add_employee') }}" class="btn btn-outline-primary mb-2 w-100">
+                    ➕ Add New Employee
+                </a>
+                <a href="{{ url_for('run_payroll') }}" class="btn btn-outline-success w-100">
+                    💰 Run Payroll
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header" style="background-color: #003366; color: white;">
+                <h5>Information</h5>
+            </div>
+            <div class="card-body text-muted">
+                <p><strong>System Features:</strong></p>
+                <ul>
+                    <li>Employee management</li>
+                    <li>Payroll calculation (GRA PAYE + SSNIT)</li>
+                    <li>PDF payslip generation</li>
+                    <li>Email payslip delivery</li>
+                    <li>Payroll history tracking</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

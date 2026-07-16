@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Employee - Napol Inc. Payroll{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 style="color: #003366;" class="mb-4">Edit Employee: {{ employee.name }}</h2>
+        
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ employee.name }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ employee.email }}" disabled>
+                            <small class="text-muted">Email cannot be changed</small>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="department" class="form-label">Department</label>
+                            <input type="text" class="form-control" id="department" name="department" value="{{ employee.department }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="job_title" class="form-label">Job Title</label>
+                            <input type="text" class="form-control" id="job_title" name="job_title" value="{{ employee.job_title }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="date_hired" class="form-label">Date Hired</label>
+                            <input type="date" class="form-control" id="date_hired" name="date_hired" value="{{ employee.date_hired.strftime('%Y-%m-%d') }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="basic_salary" class="form-label">Basic Salary (GH₵)</label>
+                            <input type="number" class="form-control" id="basic_salary" name="basic_salary" value="{{ employee.basic_salary }}" step="0.01" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" value="{{ employee.phone or '' }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="bank_name" class="form-label">Bank Name</label>
+                            <input type="text" class="form-control" id="bank_name" name="bank_name" value="{{ employee.bank_name or '' }}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="bank_account" class="form-label">Bank Account Number</label>
+                        <input type="text" class="form-control" id="bank_account" name="bank_account" value="{{ employee.bank_account or '' }}">
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn" style="background-color: #003366; color: white;">
+                            Update Employee
+                        </button>
+                        <a href="{{ url_for('employees_list') }}" class="btn btn-outline-secondary">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

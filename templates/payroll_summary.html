@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Payroll Summary - Napol Inc. Payroll{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h2 style="color: #003366;">Payroll Summary</h2>
+    <p class="text-muted">{{ month_name }} {{ payslips[0].year }}</p>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <h6 class="text-muted">Total Payslips</h6>
+                <h3 style="color: #003366;">{{ payslips|length }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <h6 class="text-muted">Total Gross Pay</h6>
+                <h3 style="color: #003366;">GH₵ {{ total_gross:,.2f }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <h6 class="text-muted">Total Tax</h6>
+                <h3 style="color: #003366;">GH₵ {{ total_tax:,.2f }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <h6 class="text-muted">Total Net Pay</h6>
+                <h3 style="color: #003366;">GH₵ {{ total_net:,.2f }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead style="background-color: #f8f9fa; border-bottom: 2px solid #003366;">
+            <tr>
+                <th>Employee</th>
+                <th>Gross Pay</th>
+                <th>Tax</th>
+                <th>SSNIT</th>
+                <th>Net Pay</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payslip in payslips %}
+            <tr>
+                <td><strong>{{ payslip.employee.name }}</strong></td>
+                <td>GH₵ {{ payslip.gross_pay:,.2f }}</td>
+                <td>GH₵ {{ payslip.paye_tax:,.2f }}</td>
+                <td>GH₵ {{ payslip.ssnit_employee:,.2f }}</td>
+                <td><strong>GH₵ {{ payslip.net_pay:,.2f }}</strong></td>
+                <td>
+                    {% if not payslip.pdf_path %}
+                        <a href="{{ url_for('generate_payslip_pdf_route', payslip_id=payslip.id) }}" class="btn btn-sm btn-outline-primary" title="Generate PDF">
+                            📄 Generate
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('view_payslip', payslip_id=payslip.id) }}" class="btn btn-sm btn-outline-info" title="View">
+                            👁️ View
+                        </a>
+                        <a href="{{ url_for('send_payslip_email', payslip_id=payslip.id) }}" class="btn btn-sm btn-outline-success" title="Email">
+                            ✉️ Email
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-4">
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+</div>
+{% endblock %}

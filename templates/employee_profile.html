@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - Napol Inc. Payroll{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 style="color: #003366;" class="mb-4">My Profile</h2>
+        
+        <div class="card">
+            <div class="card-header" style="background-color: #003366; color: white;">
+                <h5>Personal Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Full Name</h6>
+                        <p>{{ employee.name }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Email Address</h6>
+                        <p>{{ employee.email }}</p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Department</h6>
+                        <p>{{ employee.department }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Job Title</h6>
+                        <p>{{ employee.job_title }}</p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Date Hired</h6>
+                        <p>{{ employee.date_hired.strftime('%d/%m/%Y') }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Basic Salary</h6>
+                        <p><strong>GH₵ {{ employee.basic_salary:,.2f }}</strong></p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Phone Number</h6>
+                        <p>{{ employee.phone or 'Not provided' }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Bank Name</h6>
+                        <p>{{ employee.bank_name or 'Not provided' }}</p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <h6 class="text-muted">Bank Account Number</h6>
+                    <p>{{ employee.bank_account or 'Not provided' }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ url_for('employee_dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
